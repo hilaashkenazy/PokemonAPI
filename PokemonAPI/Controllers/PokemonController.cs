@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using PokemonApi.Models;
-using PokemonApi.Services;
+using PokemonAPI.Models;
+using PokemonAPI.Services;
 
-namespace PokemonApi.Controllers
+namespace PokemonAPI.Controllers
 {
     [ApiController]
     [Route("[controller]")]

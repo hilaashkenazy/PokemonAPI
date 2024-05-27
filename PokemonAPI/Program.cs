@@ -1,6 +1,6 @@
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddHttpClient<PokemonApi.Services.PokemonService>();
+builder.Services.AddHttpClient<PokemonAPI.Services.PokemonService>();
 builder.Services.AddControllers();
 
 // Add services to the container.
