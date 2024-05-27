@@ -52,26 +52,5 @@ namespace PokemonApi.Services
             return int.Parse(segments[segments.Length - 2]);
         }
     }
-
-    public class AbilityData
-    {
-        [JsonProperty("pokemon")]
-        public required List<PokemonAbility> Pokemon { get; set; }
-    }
-
-    public class PokemonAbility
-    {
-        [JsonProperty("pokemon")]
-        public required Pokemon Pokemon { get; set; }
-    }
-
-    public class Pokemon
-    {
-        [JsonProperty("name")]
-        public required string Name { get; set; }
-
-        [JsonProperty("url")]
-        public required string Url { get; set; }
-    }
 }
 
