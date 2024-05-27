@@ -1,14 +1,19 @@
 ﻿using Newtonsoft.Json;
+using PokemonAPI.Models;
+using Microsoft.Extensions.Caching.Memory;
 
 namespace PokemonApi.Services
 {
     public class PokemonService
     {
         private readonly HttpClient _httpClient;
+        private readonly Dictionary<string,List<string>> _cache;
 
         public PokemonService(HttpClient httpClient)
         {
             _httpClient = httpClient;
+            _cache = new Dictionary<string, List<string>>();
+
         }
 
          public async Task<List<string>> GetPokemonByAbilityAsync(string ability)
@@ -24,9 +29,20 @@ namespace PokemonApi.Services
             {
             Console.WriteLine($"Error retrieving data: {e.Message}");
             }
-            var abilityData = JsonConvert.DeserializeObject<AbilityData>(response);
+
+            // first check if ability is in dictionary else send request 
+            if (_cache.ContainsKey(ability)) 
+            { 
+                return _cache[ability];
+            }
+            
 
             var filteredPokemon = new List<string>();
+
+
+            var abilityData = JsonConvert.DeserializeObject<AbilityData>(response);
+
+            
 
             if (abilityData == null || abilityData.Pokemon == null)
             {
@@ -42,6 +58,10 @@ namespace PokemonApi.Services
                 }
                 filteredPokemon.Add(pokemonEntry.Pokemon.Name);
             }
+
+            // Add new call to dictionary
+            _cache[ability] = filteredPokemon;
+            
 
             return filteredPokemon;
         }
