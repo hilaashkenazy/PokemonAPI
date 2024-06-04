@@ -27,7 +27,7 @@ namespace PokemonAPI.Controllers
             foreach (var ability in abilityRequest.Abilities)
             {
                 var pokemonWithAbility = await _pokemonService.GetPokemonByAbilityAsync(ability);
-              //  allFilteredPokemon.AddRange(pokemonWithAbility);
+              
                 foreach (var pokemon in pokemonWithAbility)
                 {
                     uniqueNames.Add(pokemon); 
